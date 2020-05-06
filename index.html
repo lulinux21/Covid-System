@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login - SUS</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		body {
+			background-color: #FAFAFA;
+			color: #FFF;
+			font-weight: bold;
+			font-family: 'Trebuchet MS', sans-serif;
+		}
+		.container {
+			background-color: #0475BD;
+			border-top: 10px solid #454545;
+			border-bottom: 10px solid #454545;
+			max-width: 350px;
+			width: 90%;
+			margin: auto;
+			padding: 5px;
+			position: relative;
+			
+			transform: translateY(30%); 
+			border-radius: 5px;
+		}
+		.container h1 {
+			text-align: center;
+			font-size: 42px;
+			text-transform: uppercase;
+			margin: 15px 0;
+			border-bottom: 5px solid #FFF;
+		}
+		.container label {
+			width: 90%;
+			margin: 5px auto;
+			display: block;
+			padding: 10px;
+		}
+		.container input {
+			width: 90%;
+			margin: 5px auto;
+			display: block;
+			padding: 10px;
+			border: 2px solid #FFF;
+			border-radius: 5px;
+		}
+		.container input:focus {
+			outline: 0;
+			transition: 0.8s;
+			border: 2px solid #FF5858;
+		}
+		.btn {
+			width: 90%;
+			margin: 20px auto;
+			display: block;
+			padding: 10px;
+			border: 2px solid #0475BD;
+			border-radius: 5px;
+			background-color: #FFF;
+			color: #111;
+			font-size: 16px;
+			transition: 1.5s;
+			text-transform: uppercase;
+			cursor: pointer;
+		}
+		.btn:hover {
+			background-color: #FF5858;
+			color: #FFF;
+			border: 2px solid #FFF;
+		}
+
+		.img {
+			width: 20%;
+		}
+	</style>
+</head>
+<body>
+	<!-- Iniciando o Código -->
+	<div id="container" class="container">
+		<h1>Login</h1>
+		<div id="conteudo"></div>
+		<div id="conteudo" class="img"></div>
+		<!-- Iniciando o Formulário -->
+		<form action="corona.php" method="POST" >
+			<label for="email">E-mail</label>
+			<input id="email" type="email" name="email" placeholder="Seu E-mail" required>
+			<label for="pass">Senha</label>
+			<input id="pass" type="password" name="pass" placeholder="Sua Senha" required>
+			<button type="submit" class="btn" onclick="requisitarPage('corona.php')">Logar</button>
+		</form>
+		<!-- Fim do Formulário -->
+	</div>
+	<!-- Fim Html -->
+	<!-- Javascript -->
+	<script type="text/javascript">
+
+		function requisitarPage(url) {
+
+			// Incluir o gif na página
+			if(!document.getElementById('loading')) {
+				let imgLoading = document.createElement('img');
+				imgLoading.id = 'loading';
+				imgLoading.src = 'gif.gif';
+				imgLoading.className = "rounded mx-auto d-block";
+
+				document.getElementById('conteudo').appendChild(imgLoading);
+			}	
+			let ajax = new XMLHttpRequest();
+			ajax.open('POST', url);
+
+			// De alguma lógica que fique olhando para o progresso da req
+			ajax.onreadystatechange = () => {
+				if(ajax.readyState == 4) {
+					console.log('Sucess');
+					document.getElementById('loading').remove();
+				}
+			}
+			ajax.send();
+			console.log(ajax);
+		}	
+	</script>
+</body>
+</html>
